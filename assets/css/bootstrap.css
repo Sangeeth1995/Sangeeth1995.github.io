@@ -2201,8 +2201,8 @@ textarea.form-control {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -200px;
-  margin-left: -200px;
+  margin-right: -5px;
+  margin-left: -5px;
 }
 
 .form-row > .col,
