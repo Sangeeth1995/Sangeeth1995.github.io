@@ -1,645 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <meta name="copyright" content="MACode ID, https://www.macodeid.com/">
-  
-  <title>Sangeeth Dev Sarangi Portfolio</title>
-  
-  <link rel="shortcut icon" type="image/x-icon" href="assets/favicon_title.svg">
-  
-  <link rel="stylesheet" type="text/css" href="assets/css/themify-icons.css">
-  
-  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sangeeth Dev Sarangi | ML Research Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #07070f;
+      --bg2: #0c0c18;
+      --purple: #7c3aed;
+      --cyan: #06b6d4;
+      --violet: #a78bfa;
+      --cyan-light: #67e8f9;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --card-bg: rgba(255,255,255,0.03);
+      --card-border: rgba(124,58,237,0.25);
+      --glass: rgba(255,255,255,0.04);
+      --grad: linear-gradient(135deg, #7c3aed, #06b6d4);
+      --grad-text: linear-gradient(135deg, #a78bfa 0%, #67e8f9 60%, #22d3ee 100%);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-  <link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
-  
-  <link rel="stylesheet" type="text/css" href="assets/vendor/owl-carousel/owl.carousel.css">
-  
-  <link rel="stylesheet" type="text/css" href="assets/vendor/perfect-scrollbar/css/perfect-scrollbar.css">
-  
-  <link rel="stylesheet" type="text/css" href="assets/vendor/nice-select/css/nice-select.css">
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 10px; }
 
-  <link rel="stylesheet" type="text/css" href="assets/vendor/fancybox/css/jquery.fancybox.min.css">
-  
-  <link rel="stylesheet" type="text/css" href="assets/css/virtual.css">
-  
-  <link rel="stylesheet" type="text/css" href="assets/css/minibar.virtual.css">
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 0;
+      transition: all 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(7,7,15,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(124,58,237,0.2);
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.3rem; font-weight: 800; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cyan-light); }
+    .nav-cta { background: var(--grad); color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.2s, box-shadow 0.2s; box-shadow: 0 0 15px rgba(124,58,237,0.35); }
+    .nav-cta:hover { opacity: 0.88; box-shadow: 0 0 25px rgba(124,58,237,0.55); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.13) 0%, transparent 55%),
+                  radial-gradient(ellipse at 80% 50%, rgba(6,182,212,0.10) 0%, transparent 55%), var(--bg);
+    }
+    #particles { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); }
+    .orb-1 { width: 420px; height: 420px; background: radial-gradient(circle, rgba(124,58,237,0.28) 0%, transparent 70%); top: 15%; left: 5%; }
+    .orb-2 { width: 360px; height: 360px; background: radial-gradient(circle, rgba(6,182,212,0.22) 0%, transparent 70%); bottom: 15%; right: 5%; }
+    .hero-content { position: relative; z-index: 2; text-align: center; max-width: 860px; padding: 0 2rem; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--cyan-light);
+      border: 1px solid rgba(6,182,212,0.3); background: rgba(6,182,212,0.06);
+      padding: 0.45rem 1.2rem; border-radius: 50px; margin-bottom: 1.8rem;
+      backdrop-filter: blur(8px); min-height: 2.4rem;
+    }
+    .cursor { animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-name { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 900; line-height: 1.08; margin-bottom: 1.2rem; letter-spacing: -0.03em; }
+    .hero-name span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--grad); color: #fff; padding: 0.8rem 2rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 0 25px rgba(124,58,237,0.4); transition: all 0.3s; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { box-shadow: 0 0 40px rgba(124,58,237,0.65); transform: translateY(-2px); }
+    .btn-outline { color: var(--cyan-light); padding: 0.8rem 2rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; border: 1px solid rgba(6,182,212,0.4); background: rgba(6,182,212,0.05); backdrop-filter: blur(8px); transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+    .btn-outline:hover { background: rgba(6,182,212,0.1); border-color: var(--cyan); box-shadow: 0 0 20px rgba(6,182,212,0.25); transform: translateY(-2px); }
+    .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 4rem; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 900; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 0.6rem; }
+    .section-title span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-line { width: 48px; height: 3px; background: var(--grad); border-radius: 3px; margin-bottom: 3rem; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    .about-text p strong { color: var(--text); }
+    .about-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .chip { font-size: 0.78rem; padding: 0.35rem 0.9rem; border-radius: 50px; border: 1px solid rgba(124,58,237,0.35); color: var(--violet); background: rgba(124,58,237,0.08); font-weight: 500; transition: all 0.2s; }
+    .chip:hover { background: rgba(124,58,237,0.18); border-color: var(--violet); box-shadow: 0 0 12px rgba(124,58,237,0.25); transform: translateY(-1px); }
+    .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .info-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; transition: all 0.3s; backdrop-filter: blur(10px); }
+    .info-card:hover { border-color: rgba(124,58,237,0.5); box-shadow: 0 0 20px rgba(124,58,237,0.15); transform: translateX(4px); }
+    .info-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; background: rgba(124,58,237,0.12); color: var(--violet); }
+    .info-label { font-size: 0.72rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+    .info-value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%); }
+    .timeline { position: relative; }
+    .timeline::before { content:''; position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, transparent, var(--purple), var(--cyan), transparent); }
+    .exp-item { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; margin-bottom: 2.5rem; position: relative; }
+    .exp-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 15px rgba(124,58,237,0.6); margin-top: 0.4rem; position: relative; z-index: 1; justify-self: center; flex-shrink: 0; }
+    .exp-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.6rem 1.8rem; backdrop-filter: blur(10px); transition: all 0.3s; }
+    .exp-card:hover { border-color: rgba(124,58,237,0.5); box-shadow: 0 0 25px rgba(124,58,237,0.12); transform: translateY(-2px); }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.3rem; }
+    .exp-title { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .exp-date { font-size: 0.78rem; color: var(--muted); font-weight: 500; white-space: nowrap; }
+    .exp-company { font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem; }
+    .exp-company a { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .exp-bullets li { color: var(--muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem; position: relative; }
+    .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--cyan); font-size: 0.7rem; top: 0.25rem; }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.6rem; backdrop-filter: blur(10px); transition: all 0.3s; display: flex; flex-direction: column; }
+    .project-card:hover { border-color: rgba(6,182,212,0.4); box-shadow: 0 0 30px rgba(6,182,212,0.1), 0 0 0 1px rgba(6,182,212,0.15); transform: translateY(-4px); }
+    .project-badge { font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 1rem; width: fit-content; }
+    .badge-prod { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+    .badge-research { background: rgba(124,58,237,0.12); color: var(--violet); border: 1px solid rgba(124,58,237,0.25); }
+    .badge-academic { background: rgba(6,182,212,0.1); color: var(--cyan-light); border: 1px solid rgba(6,182,212,0.25); }
+    .project-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+    .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); }
+    .project-link { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; color: var(--cyan-light); text-decoration: none; margin-top: 1rem; transition: gap 0.2s; font-weight: 500; }
+    .project-link:hover { gap: 0.6rem; }
+
+    /* ── SKILLS ── */
+    #skills { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem; backdrop-filter: blur(10px); transition: all 0.3s; }
+    .skill-card:hover { border-color: rgba(124,58,237,0.45); box-shadow: 0 0 22px rgba(124,58,237,0.12); }
+    .skill-cat { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.2rem; }
+    .skill-cat-icon { width: 36px; height: 36px; border-radius: 9px; background: rgba(124,58,237,0.15); display: flex; align-items: center; justify-content: center; color: var(--violet); font-size: 0.95rem; }
+    .skill-cat-name { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-pill { font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 50px; background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); transition: all 0.25s; cursor: default; }
+    .skill-pill:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: var(--violet); box-shadow: 0 0 10px rgba(124,58,237,0.2); transform: translateY(-2px); }
+
+    /* ── PUBLICATIONS ── */
+    .pub-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 2rem; backdrop-filter: blur(10px); display: flex; gap: 1.5rem; align-items: flex-start; transition: all 0.3s; }
+    .pub-card:hover { border-color: rgba(124,58,237,0.45); box-shadow: 0 0 25px rgba(124,58,237,0.12); }
+    .pub-icon { width: 50px; height: 50px; border-radius: 12px; background: rgba(124,58,237,0.12); display: flex; align-items: center; justify-content: center; color: var(--violet); font-size: 1.3rem; flex-shrink: 0; }
+    .pub-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+    .pub-venue { font-size: 0.82rem; color: var(--cyan-light); font-weight: 500; margin-bottom: 0.5rem; }
+    .pub-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    #contact { background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 60%), var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-info p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; color: var(--text); text-decoration: none; padding: 0.9rem 1.2rem; border-radius: 10px; border: 1px solid var(--card-border); background: var(--card-bg); transition: all 0.3s; }
+    .contact-link:hover { border-color: rgba(124,58,237,0.5); box-shadow: 0 0 18px rgba(124,58,237,0.15); transform: translateX(4px); }
+    .contact-link i { width: 20px; text-align: center; color: var(--violet); }
+    .social-links { display: flex; gap: 1rem; margin-top: 2rem; }
+    .social-btn { width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--card-border); background: var(--card-bg); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; transition: all 0.3s; font-size: 1rem; }
+    .social-btn:hover { border-color: rgba(124,58,237,0.5); color: var(--violet); box-shadow: 0 0 15px rgba(124,58,237,0.2); transform: translateY(-3px); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+    .form-group input, .form-group textarea { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 0.75rem 1rem; color: var(--text); font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: rgba(124,58,237,0.6); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+    .form-group textarea { min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.06); color: var(--muted); font-size: 0.82rem; }
+    footer span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; } .nav-links.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: rgba(7,7,15,0.98); align-items: center; justify-content: center; gap: 2rem; font-size: 1.2rem; z-index: 99; }
+      .hamburger { display: flex; z-index: 100; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+    }
+  </style>
 </head>
-<body class="theme-purple">
-  
-  <!-- Back to top button -->
-  <div class="btn-back_to_top">
-    <span class="ti-arrow-up"></span>
-  </div>
-  
-  
-  
-  <div class="topbar-nav fixed-top">
-    <div class="brand">
-      <img src="assets/favicon.ico" alt="" width="30" height="30">
-    </div>
-    <h3 class="ml-1">angeeth</h3>
-    <button class="btn-fab toggle-menu mr-3"><span class="ti-menu"></span></button>
-  </div>
-  
-  <!-- Minibar -->
-  <div class="minibar">
-    <div class="header">
-      <div class="brand">
-        
-      </div>
-    </div>
-    <div class="content">
-      <ul class="main-menu">
-        <li class="menu-item active">
-          <a href="#home" class="menu-link">
-            <span class="icon ti-home"></span>
-            <span class="caption">Home</span>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="#about" class="menu-link">
-            <span class="icon ti-user"></span>
-            <span class="caption">About</span>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="#services" class="menu-link">
-            <span class="icon ti-file"></span>
-            <span class="caption">Publications</span>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="#portfolio" class="menu-link">
-            <span class="icon ti-briefcase"></span>
-            <span class="caption">Portfolio</span>
-          </a>
-        </li>
-        <!-- <li class="menu-item">
-          <a href="#blog" class="menu-link">
-            <span class="icon ti-book"></span>
-            <span class="caption">Blog</span>
-          </a>
-        </li> -->
-        <li class="menu-item">
-          <a href="#contact" class="menu-link">
-            <span class="icon ti-location-pin"></span>
-            <span class="caption">Contact</span>
-          </a>
-        </li>
-      </ul>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Sangeeth Dev</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://www.linkedin.com/in/sangeeth-dev/" target="_blank" class="nav-cta">Let's Connect</a>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
     </div>
   </div>
-  
-  <div class="vg-main-wrapper">
-    <div class="vg-page page-home" id="home" style="background-image: url(assets/img/a.jpeg);">
-      <div class="caption wow zoomInUp">
-        <h1 class="fw-normal">Hi</h1>
-        <h2 class="fw-medium fg-theme">I'm Sangeeth Dev Sarangi</h2>
-        <p class="tagline">Passionate in Deep Learning and experienced Software Engineer </p>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="particles"></canvas>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fas fa-circle" style="font-size:0.5rem;color:var(--cyan)"></i>
+      <span id="typedRole"></span><span class="cursor">|</span>
+    </div>
+    <h1 class="hero-name">
+      Hi, I'm <br/>
+      <span>Sangeeth Dev Sarangi</span>
+    </h1>
+    <p class="hero-sub">
+      Transforming data and AI research into intelligent real-world solutions.
+      Specialising in NLP, LLMs, and building systems that drive innovation.
+    </p>
+    <div class="hero-btns">
+      <a href="https://www.linkedin.com/in/sangeeth-dev/" target="_blank" class="btn-primary">
+        <i class="fab fa-linkedin"></i> Connect on LinkedIn
+      </a>
+      <a href="#contact" class="btn-outline">
+        <i class="fas fa-envelope"></i> Get In Touch
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-num">1</div><div class="stat-label">Conference Paper</div></div>
+      <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Projects</div></div>
+      <div class="stat"><div class="stat-num">MSc</div><div class="stat-label">AI with Distinction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-tag">// about me</div>
+    <h2 class="section-title">Who I <span>Am</span></h2>
+    <div class="section-line"></div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm a <strong>Machine Learning Research Engineer</strong> at <strong>Jaguar Land Rover</strong>, working within the NLP Squad on cutting-edge AI and language model applications in automotive systems.</p>
+        <p>With <strong>4+ years of experience</strong> spanning ML research, data analytics, and software engineering, I bring a unique combination of research rigour and production engineering to every project I tackle.</p>
+        <p>I hold an <strong>MSc in Artificial Intelligence & Data Science with Distinction</strong> from Keele University, and have published research at the VISAPP 2023 international conference on computer vision.</p>
+        <div class="about-chips">
+          <span class="chip">Machine Learning</span>
+          <span class="chip">NLP & LLMs</span>
+          <span class="chip">Data Analytics</span>
+          <span class="chip">AI Research</span>
+          <span class="chip">LangChain</span>
+          <span class="chip">Deep Learning</span>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-briefcase"></i></div>
+          <div><div class="info-label">Current Role</div><div class="info-value">ML Research Engineer @ JLR</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div><div class="info-label">Location</div><div class="info-value">Coventry, United Kingdom</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div><div class="info-label">Education</div><div class="info-value">MSc AI & Data Science (Distinction)</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-book-open"></i></div>
+          <div><div class="info-label">Publication</div><div class="info-value">VISAPP 2023 Conference</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div><div class="info-label">Email</div><div class="info-value">sangeethdev1995@gmail.com</div></div>
+        </div>
       </div>
     </div>
-    
-    <!-- Page About -->
-    <div class="vg-page page-about" id="about">
-      <!-- Profile -->
-      <div class="container py-3">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="img-place wow zoomIn">
-              <img src="assets/img/person1.jpeg" alt="Photo Profile">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="caption wow fadeInRight">
-              <h2 class="fg-dark">Sangeeth Dev Sarangi</h2>
-              <p class="fg-theme fw-medium">Software Engineer</p>
+  </div>
+</section>
 
-              <p>I am a recent Master's degree holder in Artificial Intelligence and Data Science from Keele University, UK, with a distinction and best performance award. </br></br> With 3 years of experience as a System Engineer at Tata Consultancy Services and handling the Ops team in Apple's CRM Project, I have developed skills in solving real-time problems, managing and developing web applications, and project management. </br></br> I am a highly motivated and results-driven professional eager to leverage my technical and leadership skills to drive innovation and impact in the field of artificial intelligence and data science.</p>
-              <!-- <p>🔭 I am a recent Master's degree holder in <b>Artificial Intelligence and Data Science </b> from Keele University, UK. With <b>distinction</b> and the <b>best performance award</b> for my Master's degree, my academic background has provided me with a strong technical foundation and an aptitude for problem-solving. </p>
-
-              <p>🤝 Currently, I am working on applying my knowledge and skills to solve real-world problems in the field of artificial intelligence and data science. I am also actively seeking collaboration opportunities with individuals and organizations who share similar interests and passion for innovation and problem-solving.</p>
-              
-              <p>💬 If you are interested in discussing topics related to artificial intelligence, data science, or any projects that I have worked on, feel free to ask me. I am always excited to share my experiences and insights and learn from others.</p>
-               -->
-              <ul class="theme-list">
-                <li class="fg-dark"><b>From:</b> Kerala, India</li>
-                <li class="fg-dark"><b>Lives In:</b> Coventry, UK</li>
-               
-              </ul>
-              <button class="btn btn-theme btn-rounded">
-              
-                <a href="assets/resume.pdf"  download="Sangeeth_Resume" style="color: inherit;">Download CV</a>
-
-                </button>
-
-            </div>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-tag">// work history</div>
+    <h2 class="section-title">Professional <span>Experience</span></h2>
+    <div class="section-line"></div>
+    <div class="timeline">
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-title">Machine Learning Research Engineer</div>
+            <div class="exp-date">Sep 2024 – Present</div>
           </div>
-        </div>
-      </div> <!-- End profile -->
-      <!-- Skills -->
-      <div class="container mt-5">
-        <h1 class="text-center fg-dark wow fadeInUp">My Skills</h1>
-        <div class="row py-3">
-          <div class="col-md-6">
-            <h4 class="wow fadeInUp">ML skills</h4>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Python</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">100%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Tensorflow</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">80%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Pandas</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">85%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Numpy</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 82%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">82%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">PyTorch</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">60%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Scikit-learn</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 78%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">78%</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <h4 class="wow fadeInUp">Web Development Skills</h4>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Java</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 92%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">92%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">HTML + CSS</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">80%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">JavaScript</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 79%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">85%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Django</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 62%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">62%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">SQL</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">90%</div>
-              </div>
-            </div>
-            <div class="progress-wrapper wow fadeInUp">
-              <span class="caption">Testing</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 83%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">83%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> <!-- End skills -->
-      <!-- Resume -->
-      <div class="container pt-5">
-        <div class="row">
-          <div class="col-md-6 wow fadeInRight">
-            <h2 class="fg-dark">Education</h2>
-            <ul class="timeline mt-4 pr-md-5">
-              <li>
-                <div class="title">2022</div>
-                <div class="details">
-                  <h5>MSc in AI and Datascience</h5>
-                  <small class="fg-theme">Keele University</small>
-                  <p><b>Grade:</b> Secured Distinction and honoured with best performance award.
-                    </p><p><b>Relevant Coursework:</b> Twitter Data Analysis, Analysis on Google Search queries, Java-based simulation of
-                    agent behaviour and transactions</p><p><b>Relevant Subjects:</b> Data Analytics and Databases, Mathematics for AI and Data science, Data Visualization,
-                    Distributed Intelligent System, Machine Learning and Cloud Computing.</p>
-                </div>
-              </li>
-              <li>
-                <div class="title">2018</div>
-                <div class="details">
-                  <h5>BTech in Computer Science and Engineering</h5>
-                  <small class="fg-theme">College of Engineering Chengannur</small>
-                  <p><b>CGPA:</b> 8.53/10.0
-                    </p><p><b>Relevant Subjects:</b> Data Structures and Algorithms, Analysis and Design of Algorithms, Database
-                    Management Systems, Object Oriented Programming, Statistics and Probability
-                    </p>
-                </div>
-              </li>
-              <!-- <li>
-                <div class="title">2014</div>
-                <div class="details">
-                  <h5>Specialize of course</h5>
-                  <small class="fg-theme">University of Study</small>
-                  <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered</p>
-                </div>
-              </li> -->
-            </ul>
-          </div>
-          <div class="col-md-6 wow fadeInRight" data-wow-delay="200ms">
-            <h2 class="fg-dark">Experience</h2>
-            <ul class="timeline mt-4 pr-md-5">
-              <li>
-                <div class="title">2018 - 2021</div>
-                <div class="details">
-                  <h5>System Engineer</h5>
-                  <small class="fg-theme">Tata Consultancy Service Limited</small>
-                  <p>
-                   
-                    
-                    &bull; Team leader for offshore operations in Apple's Customer Relationship Management Project.
-                  </br> &bull; Developed and implemented technical solutions that improved system functionality and met client
-                    requirements.
-                  </br> &bull; Demonstrated keen capabilities across varied programming software, including competence in Python and
-                    Java.
-                  </br> &bull; Coordinated with wider engineering teams to design and implement technical solutions for improved
-                    system functionality.
-                  </br> &bull; Used outstanding communication and relationship-building abilities to liaise with project and engineering
-                    teams for smooth-running systems delivery.</p>
-                </div>
-              </li>
-              <li>
-                <div class="title">2016</div>
-                <div class="details">
-                  <h5>Intern Web Developer</h5>
-                  <small class="fg-theme">Sony Global - Indsie Technologies</small>
-                  <p>&bull; Developed an accounting website to be used in live handicraft e-commerce transactions of Indsie.com.
-                  </br> &bull; Delivered clean, error-free code matching project scope and minimising performance issues.</p>
-                </div>
-              </li>
-         
-            </ul>
-          </div>
-        </div>
-      </div> <!-- End resume -->
-    </div> <!-- End page about -->
-    
-    <!-- Page Service -->
-    <div class="vg-page page-service" id="services">
-      <h1 class="text-center wow fadeInUp">Publications</h1>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-lg-12 wow fadeInUp">
-            <div class="card card-body">
-              <div class="iconic">
-                <span class="ti-write"></span>
-              </div>
-              <h4 class="fg-theme">Deep Neural Network Based Attention Model for Structural Component
-                Recognition</h4>
-              <p>Sarangi, S. and Mandal, B. (2023). Deep Neural Network Based Attention Model for Structural Component
-                Recognition. In Proceedings of the 18th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications - Volume 4: VISAPP, ISBN 978-989-758-634-7, ISSN 2184-4321, pages 317-326.</p>
-              <a href="https://www.scitepress.org/PublicationsDetail.aspx?ID=z9Gur9jZz0k=&t=1" class="btn btn-theme btn-rounded">Read More</a>
-            </div>
-          </div>
-          
+          <div class="exp-company"><a href="#">Jaguar Land Rover (JLR)</a> &nbsp;·&nbsp; NLP Squad &nbsp;·&nbsp; Coventry, UK</div>
+          <ul class="exp-bullets">
+            <li>Integrated ChatGPT-based conversational AI into JLR vehicle infotainment systems, enhancing user interaction and accuracy by 30%</li>
+            <li>Published research at VISAPP 2023 on attention-based deep neural networks for automated structural component recognition</li>
+            <li>Developing comprehensive AI Agent evaluation frameworks using LangChain and LangGraph, testing for bias, hallucination, and jailbreak resistance</li>
+          </ul>
         </div>
       </div>
-    </div> <!-- End page services -->
-    
-    <!-- Testimonials -->
-    <div class="vg-page p-0" id="testimonial">
-      <div class="owl-carousel testi-carousel" style="background-image: url(assets/img/4.jpeg);">
-        <div class="item">
-          <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus, dicta atque. Voluptas illum quasi asperiores autem unde cupiditate temporibus quisquam iste rem dignissimos. Commodi placeat, quis omnis inventore asperiores sit.</p> -->
-          <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark" alt="Dev Quotes" >
-         
-        </div>
-        
-      </div>
-    </div> <!-- End testimonial -->
-    
-    <!-- Portfolio page -->
-    <div class="vg-page page-portfolio" id="portfolio">
-      <div class="container">
-        <div class="text-center wow fadeInUp">
-          <div class="badge badge-subhead">Portfolio</div>
-        </div>
-        <h1 class="text-center fw-normal wow fadeInUp">See my work</h1>
-        <div class="filterable-button py-3 wow fadeInUp" data-toggle="selected">
-          <button class="btn btn-theme-outline selected" data-filter="*">All</button>
-          <button class="btn btn-theme-outline" data-filter=".cv">Computer Vision</button>
-          <button class="btn btn-theme-outline" data-filter=".nn">Neural Network</button>
-          <button class="btn btn-theme-outline" data-filter=".nlp">NLP</button>
-          <button class="btn btn-theme-outline" data-filter=".ml">Machine Learning</button>
-          <button class="btn btn-theme-outline" data-filter=".da">Data Analytics</button>
-          <!-- <button class="btn btn-theme-outline" data-filter=".wireframes">Wireframes</button> -->
-        </div>
-
-        <div class="gridder my-3">
-
-          <div class="grid-item cv nn ml wow zoomIn">
-            
-            <div class="img-place" data-src="assets/img/b1.ppg"  data-caption="<h5 class='fg-theme'>Mobile Travel App</h5> <p>Travel, Discovery</p>">
-              <img src="assets/img/b1.png" >
-           
-
-              <div class="img-caption">
-                <h5 class="fg-theme"><a href="https://github.com/Sangeeth1995/DNNAM" style="color: inherit;">Structural Component Recognition</a></h5>
-                <p>Computer Vision</p>
-              </div>
-            </div>
-           
-            
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-title">Data Analyst</div>
+            <div class="exp-date">Sep 2023 – Sep 2024</div>
           </div>
-
-         
-
-          <div class="grid-item nn ml wow zoomIn">
-            <div class="img-place" data-src="assets/img/fr1.jpeg"  data-caption="<h5 class='fg-theme'>Music App</h5> <p>Musics</p>">
-              <img src="assets/img/fr5.png" style="max-width: 100%;height: auto;">
-              <div class="img-caption">
-                <h5 class="fg-theme"><a href="https://github.com/Sangeeth1995/Demographic-Face-Recognition" style="color: inherit;">Demographic Face Recognition</a></h5>
-                <p>Neural Network</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-item ml da wow zoomIn">
-            <div class="img-place" data-src="assets/img/pt.png"  data-caption="<h5 class='fg-theme'>Gaming Dashboard</h5> <p>Games, Streaming</p>">
-              <img src="assets/img/pt1.png" alt="">
-              <div class="img-caption">
-                <h5 class="fg-theme"><a href="https://github.com/Sangeeth1995/Performance-Test-Analysis" style="color: inherit;">Performance Test Analysis</a></h5>
-                <p>Data Analytics</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-item ml wow zoomIn">
-            <div class="img-place" data-src="assets/img/work/work-4.jpg"  data-caption="<h5 class='fg-theme'>Drugs Delivery App</h5> <p>Health, Drugs</p>">
-              <img src="assets/img/tsa2.png" alt="">
-              <div class="img-caption">
-                <h5 class="fg-theme"><a href="https://github.com/Sangeeth1995/Time-Series-Analysis" style="color: inherit;">Time Series Analysis</a>
-                  
-                  </h5>
-                <p>Machine Learning</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-item ml nlp wow zoomIn">
-            <div class="img-place" data-src="assets/img/mrs1.jpeg"  data-caption="<h5 class='fg-theme'>Musics Discover</h5> <p>Musics, Dashboard</p>">
-              <img src="assets/img/mrs2.png" alt="">
-              <div class="img-caption">
-                <h5 class="fg-theme"><a href="https://github.com/Sangeeth1995/Keele-Uni-Course-Works/blob/main/Applications%20of%20AI%20%26%20ML/Practicals/Week%204/Lab-4-recommeder-system-Questions.ipynb" style="color: inherit;">Movie Recommendation System</a></h5>
-                <p>NLP</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-item ml wow zoomIn">
-            <div class="img-place" data-src="assets/img/vr.jpeg"  data-caption="<h5 class='fg-theme'>Game Streaming</h5> <p>Games, Streaming</p>">
-              <img src="assets/img/vr2.png" alt="">
-              <div class="img-caption">
-                <h5 class="fg-theme"><a href="https://github.com/Sangeeth1995/Keele-Uni-Course-Works/blob/main/Applications%20of%20AI%20%26%20ML/Practicals/Week%207/Lab-10-part2-deep-leanring-voice-recognition-questions.ipynb" style="color: inherit;">Voice Recognition Model</a></h5>
-                <p>Speech Recognition</p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- End gridder -->
-        <div class="text-center wow fadeInUp">
-          <a href="https://github.com/Sangeeth1995" class="btn btn-theme">Visit more works on my Github <ion-icon name="logo-github"></ion-icon></a>
+          <div class="exp-company"><a href="#">Jaguar Land Rover (JLR)</a> &nbsp;·&nbsp; Powertrain Analytics &nbsp;·&nbsp; Coventry, UK</div>
+          <ul class="exp-bullets">
+            <li>Designed analytics dashboards using Tableau, BigQuery, and Python, reducing test cycle analysis time by 35%</li>
+            <li>Recognised for the Game Changer MLA BEV Test Transformation project, saving hundreds of engineering hours annually</li>
+          </ul>
         </div>
       </div>
-    </div> <!-- End Portfolio page -->
-
-
-
-
-
-
-
-     <!-- Page Blog -->
-     <!-- <div class="vg-page page-blog" id="blog">
-      <h1 class="text-center fg-dark wow fadeInUp">Latest Post</h1>
-      <div class="container">
-        <div class="row post-grid">
-          <div class="col-md-6 col-lg-4 wow fadeInUp">
-            <div class="card">
-              <div class="img-place">
-                <img src="assets/img/work/work-9.jpg" alt="">
-
-           
-
-              </div>
-              <div class="caption">
-                <a href="javascript:void(0)" class="post-category">Technology</a>
-                <a href="#" class="post-title">Invision design forward fund</a>
-                <span class="post-date"><span class="sr-only">Published on</span> May 22, 2018</span>
-              </div>
-            </div>
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-title">Software Engineer</div>
+            <div class="exp-date">Jun 2018 – Oct 2021</div>
           </div>
-          <div class="col-md-6 col-lg-4 wow fadeInUp">
-            <div class="card">
-              <div class="img-place">
-                <img src="assets/img/work/work-6.jpg" alt="">
-              </div>
-              <div class="caption">
-                <a href="javascript:void(0)" class="post-category">Business</a>
-                <a href="#" class="post-title">Announcing a plan for small teams</a>
-                <span class="post-date"><span class="sr-only">Published on</span> May 22, 2018</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 wow fadeInUp">
-            <div class="card">
-              <div class="img-place">
-                <img src="assets/img/work/work-1.jpg" alt="">
-              </div>
-              <div class="caption">
-                <a href="javascript:void(0)" class="post-category">Design</a>
-                <a href="#" class="post-title">5 basic tips for illustrating</a>
-                <span class="post-date"><span class="sr-only">Published on</span> May 22, 2018</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 text-center py-3 wow fadeInUp">
-            <a href="blog-minibar.html" class="btn btn-theme">See All Post</a>
-          </div>
+          <div class="exp-company"><a href="#">Tata Consultancy Services</a> &nbsp;·&nbsp; Client: Apple Inc &nbsp;·&nbsp; Bangalore, India</div>
+          <ul class="exp-bullets">
+            <li>Led offshore CRM development, improving system efficiency and customer satisfaction by 30%</li>
+            <li>Delivered backend solutions in Python, Java, SQL, improving delivery speed by 15% and code quality by 30%</li>
+          </ul>
         </div>
       </div>
-    </div>  -->
-    
-    <!-- End page blog -->
-    
-   
-    
-    <!-- Page Contact -->
-    <div class="vg-page page-contact" id="contact">
-      <h1 class="text-center fg-dark wow fadeInUp">Contact</h1>
-      <div class="container-fluid">
-        <div class="row py-5">
-          <!-- <div class="col-lg-7 wow zoomIn">
-            <div class="vg-maps">
-              <div id="google-maps" style="width: 100%; height: 100%;"></div>
-            </div>
-          </div> -->
-          <div class="col-lg-12">
-            <form class="vg-contact-form" action="https://formsubmit.co/sangeethdev1995@gmail.com" method="POST">
-              <!-- <form class="vg-contact-form" id="contact-form"> -->
-              <div class="form-row">
-                <div class="col-12 wow fadeInUp">
-                  <input class="form-control" type="text" name="Name" id="Name" placeholder="Your Name" required>
-                </div>
-                <div class="col-6 wow fadeInUp">
-                  <input class="form-control" type="email" name="Email" id="Email" placeholder="Email Address" required>
-                </div>
-                <div class="col-6 wow fadeInUp">
-                  <input class="form-control" type="text" name="Subject" id="Subject" placeholder="Subject" required>
-                </div>
-                <div class="col-12 wow fadeInUp">
-                  <textarea class="form-control" name="Message" id="Message" rows="6" placeholder="Enter message here.." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1" id="submit-btn">Send Message</button>
-                <button type="reset" class="btn btn-theme mt-3 wow fadeInUp ml-1">Clear</button>
+    </div>
+  </div>
+</section>
 
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-tag">// what I've built</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-badge badge-prod">● Production</div>
+        <div class="project-title">AI Voice Integration for JLR</div>
+        <div class="project-desc">Integrated ChatGPT-based conversational AI models into vehicle infotainment systems, enhancing user interaction and accuracy by 30% across the JLR vehicle range.</div>
+        <div class="project-tags"><span class="tag">LLMs</span><span class="tag">ChatGPT</span><span class="tag">Voice AI</span><span class="tag">Infotainment</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-research">● Research</div>
+        <div class="project-title">Structural Component Recognition</div>
+        <div class="project-desc">Published at VISAPP 2023. Attention-based deep neural network for automated image analysis and structural component identification with high precision.</div>
+        <div class="project-tags"><span class="tag">Deep Learning</span><span class="tag">Computer Vision</span><span class="tag">CNN</span><span class="tag">Research</span></div>
+        <a href="https://github.com/Sangeeth1995" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-prod">● Production</div>
+        <div class="project-title">Powertrain Analytics Dashboard</div>
+        <div class="project-desc">Real-time analytics platform for JLR's Powertrain test rigs using Tableau, BigQuery, and Python — reducing analysis time by 35%.</div>
+        <div class="project-tags"><span class="tag">Tableau</span><span class="tag">BigQuery</span><span class="tag">Python</span><span class="tag">Analytics</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-research">● Research</div>
+        <div class="project-title">AI Agent Evaluation Framework</div>
+        <div class="project-desc">Comprehensive evaluation framework for LLM-based agents, testing for bias, hallucination, and jailbreak resistance using LangChain and LangGraph.</div>
+        <div class="project-tags"><span class="tag">LLMs</span><span class="tag">LangChain</span><span class="tag">LangGraph</span><span class="tag">Ethics</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-academic">● Academic</div>
+        <div class="project-title">Movie Recommendation System</div>
+        <div class="project-desc">NLP-driven recommendation engine using collaborative filtering and sentiment analysis for personalised movie suggestions.</div>
+        <div class="project-tags"><span class="tag">NLP</span><span class="tag">Machine Learning</span><span class="tag">Python</span></div>
+        <a href="https://github.com/Sangeeth1995/Keele-Uni-Course-Works" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-academic">● Academic</div>
+        <div class="project-title">Face Recognition System</div>
+        <div class="project-desc">CNN-based facial recognition system with high accuracy, built during MSc programme using TensorFlow and Keras with advanced data augmentation.</div>
+        <div class="project-tags"><span class="tag">CNN</span><span class="tag">TensorFlow</span><span class="tag">Deep Learning</span></div>
+        <a href="https://github.com/Sangeeth1995/Demographic-Face-Recognition" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  
-
-
-              </div>
-            </form>
-
-
-
- 
-          </div>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-tag">// tech stack</div>
+    <h2 class="section-title">Skills &amp; <span>Expertise</span></h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-brain"></i></div><div class="skill-cat-name">AI &amp; Machine Learning</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">Scikit-learn</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">Keras</span><span class="skill-pill">Transformers</span><span class="skill-pill">RAG</span><span class="skill-pill">Prompt Engineering</span><span class="skill-pill">LangChain</span><span class="skill-pill">LangGraph</span>
         </div>
       </div>
-    </div> <!-- End page contact -->
-
-    
-
-
-
-
-    
-    <!-- Footer -->
-    <div class="vg-footer">
-      <!-- <h1 class="text-center">Virtual Folio</h1> -->
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 py-3">
-            <div class="footer-info">
-              <p><ion-icon name="home-outline"></ion-icon> Address</p>
-
-              <ul class="list-unstyled">
-                <li>39 Hawkins Rd</li>
-                <li>Coventry CV5 6HZ</li>
-                <li>West Midlands</li>
-                <li>United Kingdom</li>
-              </ul>
-
-
-                
-                
-            </div>
-          </div>
-
-          <div class="col-lg-4 py-3">
-            <div class="footer-info">
-              <p><ion-icon name="planet-outline"></ion-icon> Follow me</p>
-              
-              <ul class="list-unstyled">
-                <li><a href="https://linkedin.com/in/sangeeth-dev"><ion-icon name="logo-linkedin"></ion-icon> Linkedin</a></li>
-                <li><a href="https://instagram.com/sangeeth_dev_s"><ion-icon name="logo-instagram"></ion-icon> Instagram</a></li>
-                <li><a href="https://facebook.com/sangeeth.dev.9"><ion-icon name="logo-facebook"></ion-icon> Facebook</a></li>
-                <li><a href="https://github.com/Sangeeth1995"><ion-icon name="logo-github"></ion-icon> Github</a></li>
-              </ul>
-
-
-                
-                
-            </div>
-          </div>
-
-
-
-
-          <div class="col-lg-4 py-3">
-            <div class="footer-info">
-              <p><ion-icon name="mail-outline"></ion-icon>   Contact me</p>
-              
-              <ul class="list-unstyled">
-
-                
-
-                <li><a href="mailto: sangeethdev1995@gmail.com"><ion-icon name="send-outline"></ion-icon>  sangeethdev1995@gmail.com</a></li>
-                <li><a href="tel:+447825201024"><ion-icon name="call-outline"></ion-icon>  +44 7825201024</a></li>
-              </ul>
-
-
-                
-                
-            </div>
-          </div>
-
-
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-database"></i></div><div class="skill-cat-name">Data &amp; Analytics</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">Tableau</span><span class="skill-pill">Power BI</span><span class="skill-pill">BigQuery</span><span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span><span class="skill-pill">PySpark</span>
         </div>
-
       </div>
-    </div> <!-- End footer -->
-  </div> <!-- End main wrapper -->
-  
-  
-  <!-- <script src="https://smtpjs.com/v3/smtp.js"></script> -->
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-code"></i></div><div class="skill-cat-name">Programming</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span><span class="skill-pill">R</span><span class="skill-pill">Java</span><span class="skill-pill">SQL</span><span class="skill-pill">C / C++</span><span class="skill-pill">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-cloud"></i></div><div class="skill-cat-name">Cloud &amp; Tools</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">GCP</span><span class="skill-pill">Azure OpenAI</span><span class="skill-pill">Gemini</span><span class="skill-pill">Cerence</span><span class="skill-pill">Git</span><span class="skill-pill">REST APIs</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-certificate"></i></div><div class="skill-cat-name">Certifications</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">Deep Learning Specialization</span><span class="skill-pill">LangChain &amp; AI Agents</span><span class="skill-pill">Machine Learning A–Z</span><span class="skill-pill">Tableau A–Z</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-users"></i></div><div class="skill-cat-name">Soft Skills</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">Stakeholder Management</span><span class="skill-pill">Cross-functional Collaboration</span><span class="skill-pill">Analytical Thinking</span><span class="skill-pill">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-inner">
+    <div class="section-tag">// research output</div>
+    <h2 class="section-title">Publications</h2>
+    <div class="section-line"></div>
+    <div class="pub-card reveal">
+      <div class="pub-icon"><i class="fas fa-book-open"></i></div>
+      <div>
+        <div class="pub-title">Deep Neural Network Based Attention Model for Structural Component Recognition</div>
+        <div class="pub-venue">📍 VISAPP 2023 – International Conference on Computer Vision Theory and Applications</div>
+        <div class="pub-desc">Proposed an attention-based deep neural network architecture for automated structural component recognition in images, demonstrating superior performance over baseline CNN models. Published as part of the JLR research initiative.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="assets/js/jquery-3.5.1.min.js"></script>
-  
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  
-  <script src="assets/vendor/owl-carousel/owl.carousel.min.js"></script>
-  
-  <script src="assets/vendor/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-  
-  <script src="assets/vendor/isotope/isotope.pkgd.min.js"></script>
-  
-  <script src="assets/vendor/nice-select/js/jquery.nice-select.min.js"></script>
-  
-  <script src="assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-tag">// get in touch</div>
+    <h2 class="section-title">Let's <span>Connect</span></h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p>I'm always open to discussing new opportunities, research collaborations, or just a conversation about AI and machine learning. Feel free to reach out!</p>
+        <div class="contact-links">
+          <a href="mailto:sangeethdev1995@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> sangeethdev1995@gmail.com</a>
+          <a href="tel:07825201024" class="contact-link"><i class="fas fa-phone"></i> 07825201024</a>
+          <a href="https://www.linkedin.com/in/sangeeth-dev/" target="_blank" class="contact-link"><i class="fab fa-linkedin"></i> linkedin.com/in/sangeeth-dev</a>
+          <a href="https://github.com/Sangeeth1995" target="_blank" class="contact-link"><i class="fab fa-github"></i> github.com/Sangeeth1995</a>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/Sangeeth1995" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/sangeeth-dev/" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:sangeethdev1995@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"/></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Your message..."></textarea></div>
+        <a href="mailto:sangeethdev1995@gmail.com" class="btn-primary" style="justify-content:center;margin-top:0.5rem"><i class="fas fa-paper-plane"></i> Send Message</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="assets/vendor/wow/wow.min.js"></script>
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by <span>Sangeeth Dev Sarangi</span> · 2025 · All rights reserved.</p>
+</footer>
 
-  <script src="assets/vendor/animateNumber/jquery.animateNumber.min.js"></script>
+<script>
+// ── PARTICLE CANVAS ──
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
 
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  
-  <script src="assets/js/google-maps.js"></script>
-  
-  <script src="assets/js/minibar-virtual.js"></script>
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIA_zqjFMsJM_sxP9-6Pde5vVCTyJmUHM&callback=initMap"></script>
+for (let i = 0; i < 85; i++) {
+  particles.push({
+    x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 1.8 + 0.4, o: Math.random() * 0.5 + 0.1
+  });
+}
 
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(103,232,249,${p.o})`; ctx.fill();
+    for (let j = i + 1; j < particles.length; j++) {
+      const q = particles[j];
+      const d = Math.hypot(p.x - q.x, p.y - q.y);
+      if (d < 120) {
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+        ctx.strokeStyle = `rgba(139,92,246,${0.2*(1-d/120)})`; ctx.lineWidth = 0.5; ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
 
+// ── TYPING ANIMATION ──
+const roles = ['Machine Learning Research Engineer','NLP & LLM Specialist','Data & AI Professional','AI Systems Architect','Published AI Researcher'];
+let ri = 0, ci = 0, deleting = false;
+const el = document.getElementById('typedRole');
+function type() {
+  const cur = roles[ri];
+  if (!deleting) {
+    el.textContent = cur.slice(0, ci + 1);
+    if (++ci === cur.length) { setTimeout(() => { deleting = true; tick(); }, 1800); return; }
+  } else {
+    el.textContent = cur.slice(0, ci - 1);
+    if (--ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+  }
+  setTimeout(tick, deleting ? 38 : 75);
+}
+function tick() { type(); }
+tick();
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── NAVBAR SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── MOBILE MENU ──
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('navLinks').classList.remove('open');
+}));
+</script>
 </body>
 </html>
