@@ -7,8 +7,55 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+
+    /* ── CUSTOM CURSOR ── */
+    #cur-dot {
+      position: fixed; top: 0; left: 0; z-index: 10000;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #67e8f9;
+      box-shadow: 0 0 10px #67e8f9, 0 0 22px rgba(6,182,212,0.7), 0 0 40px rgba(6,182,212,0.3);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      transition: transform 0.15s, opacity 0.2s;
+      will-change: left, top;
+    }
+    #cur-ring {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      width: 38px; height: 38px;
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      transition: width 0.25s cubic-bezier(.22,.68,0,1.4), height 0.25s cubic-bezier(.22,.68,0,1.4);
+      will-change: left, top;
+      animation: ring-spin 6s linear infinite;
+    }
+    @keyframes ring-spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+    #cur-ring .c-tl, #cur-ring .c-tr, #cur-ring .c-bl, #cur-ring .c-br {
+      position: absolute; width: 11px; height: 11px;
+      border-style: solid; border-color: var(--violet);
+      transition: border-color 0.2s;
+    }
+    #cur-ring .c-tl { top:0; left:0;  border-width: 2px 0 0 2px; }
+    #cur-ring .c-tr { top:0; right:0; border-width: 2px 2px 0 0; }
+    #cur-ring .c-bl { bottom:0; left:0;  border-width: 0 0 2px 2px; }
+    #cur-ring .c-br { bottom:0; right:0; border-width: 0 2px 2px 0; }
+    #cur-ring.locked .c-tl,
+    #cur-ring.locked .c-tr,
+    #cur-ring.locked .c-bl,
+    #cur-ring.locked .c-br { border-color: #67e8f9; }
+    #cur-label {
+      position: fixed; z-index: 9998; pointer-events: none;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: rgba(103,232,249,0.75); letter-spacing: 0.06em;
+      opacity: 0; transition: opacity 0.2s; white-space: nowrap;
+      transform: translate(14px, 14px);
+    }
+    @media (max-width: 768px) {
+      #cur-dot, #cur-ring, #cur-label { display: none; }
+      *, *::before, *::after { cursor: auto !important; }
+    }
     :root {
       --bg: #07070f;
       --bg2: #0c0c18;
@@ -198,6 +245,14 @@
   </style>
 </head>
 <body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cur-dot"></div>
+<div id="cur-ring">
+  <span class="c-tl"></span><span class="c-tr"></span>
+  <span class="c-bl"></span><span class="c-br"></span>
+</div>
+<div id="cur-label"></div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -400,7 +455,28 @@
         <div class="project-title">Structural Component Recognition</div>
         <div class="project-desc">Published at VISAPP 2023. Attention-based deep neural network for automated image analysis and structural component identification, outperforming baseline CNN models — part of the JLR research initiative.</div>
         <div class="project-tags"><span class="tag">Deep Learning</span><span class="tag">Computer Vision</span><span class="tag">CNN</span><span class="tag">Attention</span></div>
-        <a href="https://github.com/Sangeeth1995" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+        <a href="https://github.com/Sangeeth1995/DNNAM" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-academic">● Academic</div>
+        <div class="project-title">Performance Test Analysis</div>
+        <div class="project-desc">Comprehensive performance testing and analysis framework for evaluating system efficiency, load handling, and bottleneck identification using data-driven methodologies.</div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Performance Testing</span><span class="tag">Data Analysis</span><span class="tag">Visualization</span></div>
+        <a href="https://github.com/Sangeeth1995/Performance-Test-Analysis" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-academic">● Academic</div>
+        <div class="project-title">Face Recognition System</div>
+        <div class="project-desc">CNN-based facial recognition system with high accuracy, built during MSc program using TensorFlow and Keras, implementing deep learning techniques for real-time face detection and identification.</div>
+        <div class="project-tags"><span class="tag">CNN</span><span class="tag">Computer Vision</span><span class="tag">TensorFlow</span><span class="tag">Deep Learning</span></div>
+        <a href="https://github.com/Sangeeth1995/Demographic-Face-Recognition" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-badge badge-academic">● Academic</div>
+        <div class="project-title">Time Series Analysis</div>
+        <div class="project-desc">Statistical and machine learning approaches for time series forecasting, trend analysis, and pattern recognition in temporal data, applied to real-world datasets.</div>
+        <div class="project-tags"><span class="tag">Time Series</span><span class="tag">Forecasting</span><span class="tag">Statistics</span><span class="tag">Machine Learning</span></div>
+        <a href="https://github.com/Sangeeth1995/Time-Series-Analysis" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -416,25 +492,37 @@
       <div class="skill-card reveal">
         <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-brain"></i></div><div class="skill-cat-name">AI &amp; Machine Learning</div></div>
         <div class="skill-pills">
-          <span class="skill-pill">Scikit-learn</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">Keras</span><span class="skill-pill">Transformers</span><span class="skill-pill">RAG</span><span class="skill-pill">Prompt Engineering</span><span class="skill-pill">LangChain</span><span class="skill-pill">LangGraph</span>
+          <span class="skill-pill">Scikit-learn</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">Keras</span><span class="skill-pill">Transformers</span><span class="skill-pill">RAG</span><span class="skill-pill">Prompt Engineering</span><span class="skill-pill">LangChain</span><span class="skill-pill">LangGraph</span><span class="skill-pill">Phoenix AI</span><span class="skill-pill">LLM Evaluation</span>
         </div>
       </div>
       <div class="skill-card reveal">
-        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-database"></i></div><div class="skill-cat-name">Data &amp; Analytics</div></div>
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-code"></i></div><div class="skill-cat-name">Languages &amp; Frameworks</div></div>
         <div class="skill-pills">
-          <span class="skill-pill">Tableau</span><span class="skill-pill">Power BI</span><span class="skill-pill">BigQuery</span><span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span><span class="skill-pill">PySpark</span>
+          <span class="skill-pill">Python</span><span class="skill-pill">R</span><span class="skill-pill">Java</span><span class="skill-pill">SQL</span><span class="skill-pill">C / C++</span><span class="skill-pill">JavaScript</span><span class="skill-pill">MATLAB</span>
         </div>
       </div>
       <div class="skill-card reveal">
-        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-code"></i></div><div class="skill-cat-name">Programming</div></div>
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-chart-bar"></i></div><div class="skill-cat-name">Data Engineering &amp; Visualisation</div></div>
         <div class="skill-pills">
-          <span class="skill-pill">Python</span><span class="skill-pill">R</span><span class="skill-pill">Java</span><span class="skill-pill">SQL</span><span class="skill-pill">C / C++</span><span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">Tableau</span><span class="skill-pill">Power BI</span><span class="skill-pill">BigQuery</span><span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span><span class="skill-pill">PySpark</span><span class="skill-pill">Seaborn</span>
         </div>
       </div>
       <div class="skill-card reveal">
-        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-cloud"></i></div><div class="skill-cat-name">Cloud &amp; Tools</div></div>
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-cloud"></i></div><div class="skill-cat-name">Cloud &amp; Platforms</div></div>
         <div class="skill-pills">
-          <span class="skill-pill">GCP</span><span class="skill-pill">Azure OpenAI</span><span class="skill-pill">Gemini</span><span class="skill-pill">Cerence</span><span class="skill-pill">Git</span><span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">GCP</span><span class="skill-pill">Azure OpenAI</span><span class="skill-pill">Gemini</span><span class="skill-pill">Cerence</span><span class="skill-pill">AWS SageMaker</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-tools"></i></div><div class="skill-cat-name">Dev Tools &amp; Databases</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span><span class="skill-pill">REST APIs</span><span class="skill-pill">Jupyter</span><span class="skill-pill">VS Code</span><span class="skill-pill">Oracle</span><span class="skill-pill">MySQL</span><span class="skill-pill">SQL Server</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-sitemap"></i></div><div class="skill-cat-name">Methodologies</div></div>
+        <div class="skill-pills">
+          <span class="skill-pill">Agile</span><span class="skill-pill">MLOps</span><span class="skill-pill">CI/CD</span><span class="skill-pill">Data Modelling</span><span class="skill-pill">Dashboard Design</span><span class="skill-pill">LLM Evaluation</span>
         </div>
       </div>
       <div class="skill-card reveal">
@@ -446,7 +534,7 @@
       <div class="skill-card reveal">
         <div class="skill-cat"><div class="skill-cat-icon"><i class="fas fa-users"></i></div><div class="skill-cat-name">Soft Skills</div></div>
         <div class="skill-pills">
-          <span class="skill-pill">Stakeholder Management</span><span class="skill-pill">Cross-functional Collaboration</span><span class="skill-pill">Analytical Thinking</span><span class="skill-pill">Problem Solving</span>
+          <span class="skill-pill">Stakeholder Management</span><span class="skill-pill">Cross-functional Collaboration</span><span class="skill-pill">Analytical Thinking</span><span class="skill-pill">Continuous Learning</span><span class="skill-pill">Problem Solving</span>
         </div>
       </div>
     </div>
@@ -462,7 +550,7 @@
     <div class="pub-card reveal">
       <div class="pub-icon"><i class="fas fa-book-open"></i></div>
       <div>
-        <div class="pub-title">Deep Neural Network Based Attention Model for Structural Component Recognition</div>
+        <div class="pub-title"><a href="https://www.scitepress.org/Link.aspx?doi=10.5220/0011688400003417" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(124,58,237,0.4);padding-bottom:1px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--violet)'" onmouseout="this.style.borderColor='rgba(124,58,237,0.4)'">Deep Neural Network Based Attention Model for Structural Component Recognition</a></div>
         <div class="pub-venue">📍 VISAPP 2023 – International Conference on Computer Vision Theory and Applications</div>
         <div class="pub-desc">Proposed an attention-based deep neural network architecture for automated structural component recognition in images, demonstrating superior performance over baseline CNN models. Published as part of the JLR research initiative.</div>
       </div>
@@ -492,10 +580,38 @@
         </div>
       </div>
       <div class="contact-form reveal">
-        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"/></div>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
-        <div class="form-group"><label>Message</label><textarea placeholder="Your message..."></textarea></div>
-        <a href="mailto:sangeethdev1995@gmail.com" class="btn-primary" style="justify-content:center;margin-top:0.5rem"><i class="fas fa-paper-plane"></i> Send Message</a>
+        <form id="contactForm" onsubmit="sendEmail(event)">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="cf-name" placeholder="Your name" maxlength="100" required/>
+            <span class="form-error" id="err-name"></span>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="cf-email" placeholder="your@email.com" maxlength="255" required/>
+            <span class="form-error" id="err-email"></span>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" id="cf-subject" placeholder="Subject" maxlength="150" required/>
+            <span class="form-error" id="err-subject"></span>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="cf-message" placeholder="Your message..." maxlength="1000" required></textarea>
+            <span class="form-error" id="err-message"></span>
+          </div>
+          <button type="submit" id="cf-submit" class="btn-primary" style="width:100%;justify-content:center;border:none;cursor:pointer;">
+            <span id="cf-btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>
+            <span id="cf-btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+          </button>
+          <div id="cf-success" style="display:none;margin-top:1rem;padding:0.9rem 1.2rem;border-radius:8px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#4ade80;font-size:0.88rem;">
+            <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon.
+          </div>
+          <div id="cf-error" style="display:none;margin-top:1rem;padding:0.9rem 1.2rem;border-radius:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.88rem;">
+            <i class="fas fa-exclamation-circle"></i> Failed to send. Please email me directly at <a href="mailto:sangeethdev1995@gmail.com" style="color:#f87171;">sangeethdev1995@gmail.com</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -581,6 +697,150 @@ function toggleMenu() {
 document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => {
   document.getElementById('navLinks').classList.remove('open');
 }));
+
+// ── ROBO CURSOR ──
+(function() {
+  const dot   = document.getElementById('cur-dot');
+  const ring  = document.getElementById('cur-ring');
+  const label = document.getElementById('cur-label');
+  if (!dot) return;
+
+  let mx = window.innerWidth/2, my = window.innerHeight/2;
+  let rx = mx, ry = my;
+  let hovering = false;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  // Click flash
+  document.addEventListener('mousedown', () => {
+    dot.style.transform = 'translate(-50%,-50%) scale(2.5)';
+    dot.style.opacity   = '0.5';
+  });
+  document.addEventListener('mouseup', () => {
+    dot.style.transform = 'translate(-50%,-50%) scale(1)';
+    dot.style.opacity   = '1';
+  });
+
+  // Hover targets
+  const targets = 'a, button, [onclick], input, textarea, select, label, .project-card, .skill-card, .exp-item, .nav-links a';
+  const labels  = {
+    'a'             : 'OPEN_LINK',
+    'button'        : 'EXECUTE',
+    'input'         : 'INPUT_MODE',
+    'textarea'      : 'INPUT_MODE',
+    '.project-card' : 'INSPECT',
+    '.skill-card'   : 'INSPECT',
+    '.exp-item'     : 'READ_LOG',
+    'nav'           : 'NAVIGATE',
+  };
+
+  function getLabel(el) {
+    if (el.tagName === 'A')        return 'OPEN_LINK ↗';
+    if (el.tagName === 'BUTTON')   return 'EXECUTE ▶';
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return 'INPUT_MODE';
+    if (el.closest('.project-card'))  return 'INSPECT_PROJECT';
+    if (el.closest('.skill-card'))    return 'READ_SKILLS';
+    if (el.closest('.exp-item'))      return 'VIEW_LOG';
+    return 'SELECT';
+  }
+
+  document.querySelectorAll(targets).forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      hovering = true;
+      ring.style.width  = '58px';
+      ring.style.height = '58px';
+      ring.classList.add('locked');
+      dot.style.transform = 'translate(-50%,-50%) scale(0)';
+    });
+    el.addEventListener('mouseleave', () => {
+      hovering = false;
+      ring.style.width  = '38px';
+      ring.style.height = '38px';
+      ring.classList.remove('locked');
+      dot.style.transform = 'translate(-50%,-50%) scale(1)';
+    });
+  });
+
+  // Smooth lerp loop
+  function tick() {
+    rx += (mx - rx) * 0.10;
+    ry += (my - ry) * 0.10;
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    label.style.left = mx + 'px';
+    label.style.top  = my + 'px';
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+// ── EMAILJS INIT ──
+(function() {
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init('zZt9l0Ss3P5T_d9MA');
+  } else {
+    window.addEventListener('load', () => emailjs.init('zZt9l0Ss3P5T_d9MA'));
+  }
+})();
+
+// ── CONTACT FORM ──
+function sendEmail(e) {
+  e.preventDefault();
+
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const subject = document.getElementById('cf-subject').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+
+  // Clear previous errors
+  ['name','email','subject','message'].forEach(f => {
+    document.getElementById('err-' + f).textContent = '';
+  });
+  document.getElementById('cf-success').style.display = 'none';
+  document.getElementById('cf-error').style.display   = 'none';
+
+  // Validate
+  let valid = true;
+  if (!name)    { document.getElementById('err-name').textContent    = 'Name is required.';    valid = false; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('err-email').textContent = 'Valid email is required.'; valid = false;
+  }
+  if (!subject) { document.getElementById('err-subject').textContent = 'Subject is required.'; valid = false; }
+  if (!message) { document.getElementById('err-message').textContent = 'Message is required.'; valid = false; }
+  if (!valid) return;
+
+  // Loading state
+  const btn     = document.getElementById('cf-submit');
+  const btnText = document.getElementById('cf-btn-text');
+  const btnLoad = document.getElementById('cf-btn-loading');
+  btn.disabled      = true;
+  btnText.style.display = 'none';
+  btnLoad.style.display = 'inline-flex';
+
+  const templateParams = {
+    from_name:    name,
+    from_email:   email,
+    subject:      subject,
+    message:      message,
+    reply_to:     email
+  };
+
+  emailjs.send('service_9260kfl', 'template_uzpb3yg', templateParams)
+    .then(() => {
+      document.getElementById('cf-success').style.display = 'block';
+      document.getElementById('contactForm').reset();
+    })
+    .catch(() => {
+      document.getElementById('cf-error').style.display = 'block';
+    })
+    .finally(() => {
+      btn.disabled          = false;
+      btnText.style.display = 'inline-flex';
+      btnLoad.style.display = 'none';
+    });
+}
 </script>
 </body>
 </html>
